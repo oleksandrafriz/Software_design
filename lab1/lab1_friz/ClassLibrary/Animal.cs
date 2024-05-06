@@ -18,6 +18,7 @@ namespace ClassLibrary
             FeedingSchedule = new List<string>();
         }
 
+
         public void AddFeedingTime(string time)
         {
             FeedingSchedule.Add(time);
@@ -30,11 +31,6 @@ namespace ClassLibrary
             {
                 Console.WriteLine(time);
             }
-        }
-
-        public virtual void Speak()
-        {
-            Console.WriteLine("Ця тварина видає звуки");
         }
     }
 
