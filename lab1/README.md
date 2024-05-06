@@ -9,22 +9,22 @@
 Кожен клас має єдину відповідальність, чітко розділяючи завдання:
 
 - **Animal.cs**: Управління всіма аспектами тварин, включаючи властивості та поведінку.
-[Animal.cs](Animal.cs)
+[Animal.cs](lab1_friz/ClassLibrary/Animal.cs)
 - **Enclosure.cs**: Присвячений управлінню даними про вольєри.
-[Enclosure.cs](Enclosure.cs)
+[Enclosure.cs](lab1_friz/ClassLibrary/Enclosure.cs)
 - **Feed.cs**: Керує управлінням кормом.
-[Feed.cs](Feed.cs)
+[Feed.cs](lab1_friz/ClassLibrary/Food.cs)
 - **Worker.cs**: Управління інформацією про працівників.
-[Worker.cs](Worker.cs)
+[Worker.cs](lab1_friz/ClassLibrary/ZooKeeper.cs)
 - **Inventory.cs**: Координує весь інвентар зоопарку.
-[Inventory.cs](Inventory.cs)
+[Inventory.cs](lab1_friz/ClassLibrary/Inventory.cs)
 
 ### 2. **Принцип відкритості-закритості (OCP)**
 
 Класи відкриті для розширення, але закриті для модифікації:
 
 - Нові типи тварин можна додавати як підкласи `Animal` без змін у наявному коді.
-  - [Animal.cs](Animal.cs#L14)
+  - [Animal.cs](lab1_friz/ClassLibrary/Animal.cs#L14)
 
 
 ### 3. **Принцип підстановки Лісков (LSP)**
@@ -32,7 +32,7 @@
 Підкласи `Animal` можуть замінювати базовий клас `Animal` без впливу на коректність програми:
 
 - Екземпляри `Лев` та `Слон` можна використовувати замінно з їх базовим класом `Animal`.
-  - [Program.cs](Program.cs#L9-L10)
+  - [Program.cs](lab1_friz/lab1_friz/Program.cs#L9-L10)
 
 ### 4. **Принцип сегрегації інтерфейсу (ISP)**
 
@@ -43,14 +43,14 @@
 Високорівневі модулі залежать від абстракцій:
 
 - `Inventory` взаємодіє з абстрактними типами тварин, а не з конкретними реалізаціями.
-[Inventory.cs](Inventory.cs#L5-L8)
+[Inventory.cs](lab1_friz/ClassLibrary/Inventory.cs#L5-L8)
 
 ### 6. **Принцип неповторення (DRY)**
 
 Спільні властивості та методи централізовані в базовому класі `Animal`:
 
 - Спільні атрибути та поведінки визначені один раз в `Animal`, використовуються всіма підкласами.
-  [Визначення базового класу Animal](Animal.cs#L1-L11)
+  [Визначення базового класу Animal](lab1_friz/ClassLibrary/Animal.cs#L1-L11)
 
 ### 7. **Принцип простоти (KISS)**
 
