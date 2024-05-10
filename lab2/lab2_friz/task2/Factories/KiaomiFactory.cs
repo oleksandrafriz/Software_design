@@ -28,5 +28,4 @@ namespace task2
             return new KiaomiSmartphone();
         }
     }
-
 }

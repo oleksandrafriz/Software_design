@@ -13,4 +13,5 @@ namespace task2
             return "IProne Laptop, 16GB RAM, 512GB SSD";
         }
     }
+
 }

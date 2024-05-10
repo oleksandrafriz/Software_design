@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using ClassLibrary1;
-using ClassLibrary3;
+using task1;
 using System.Text;
 using task2;
+using task3;
 using task4;
 using task5;
 

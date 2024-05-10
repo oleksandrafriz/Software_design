@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace task1
 {
     class EducationalSubscription : Subscription
     {
@@ -21,5 +21,4 @@ namespace ClassLibrary1
                  $"Переваги: {string.Join(", ", Features)}");
         }
     }
-
 }

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace ClassLibrary3
+namespace task3
 {
     public sealed class Authenticator
     {
@@ -31,6 +35,4 @@ namespace ClassLibrary3
             Console.WriteLine("Authenticated successfully!");
         }
     }
-
-   
 }

@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClassLibrary1
+namespace task1
 {
-    public class MobileApp : ISubscriptionCreator
+    public class ManagerCall : ISubscriptionCreator
     {
         public Subscription CreateSubscription(string type)
         {
-            Console.WriteLine("\nПідписка через мобільний застосунок");
-            
+            Console.WriteLine("\nПідписка чeрез дзівнок");
             return SubscriptionCreation.CreateSubscription(type);
         }
     }
