@@ -17,7 +17,7 @@ namespace task5
 
         public override string ToHtml()
         {
-            return text;  // Simply return the text for a text node
+            return text;
         }
     }
 }

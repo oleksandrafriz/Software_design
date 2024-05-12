@@ -9,7 +9,7 @@ namespace task5
     public class LightElementNode : LightNode
     {
         public string TagName { get; }
-        public string DisplayType { get; }  // "block" or "line"
+        public string DisplayType { get; } 
         public bool IsSelfClosing { get; }
         public List<string> Classes { get; }
         public List<LightNode> Children { get; }
