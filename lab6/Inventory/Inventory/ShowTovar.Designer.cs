@@ -83,6 +83,7 @@ namespace Inventory
             this.dgvProducts.RowTemplate.Height = 29;
             this.dgvProducts.Size = new System.Drawing.Size(630, 232);
             this.dgvProducts.TabIndex = 4;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
             // ShowTovar
             // 

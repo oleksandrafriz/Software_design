@@ -50,5 +50,10 @@ namespace Inventory
                                     .ToList();
             dgvProducts.DataSource = products;
         }
+
+        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadProducts();
+        }
     }
 }
