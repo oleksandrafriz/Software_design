@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.IO;
+using System.Text;
 using ClassLibrary;
 
 namespace Inventory
@@ -21,8 +24,8 @@ namespace Inventory
         {
             var products = mainController.GetAllProducts();
             chooseTovar.DataSource = products;
-            chooseTovar.DisplayMember = "Id"; // Display the product ID
-            chooseTovar.ValueMember = "Id"; // Use the product ID as the value
+            chooseTovar.DisplayMember = "Id";
+            chooseTovar.ValueMember = "Id";
         }
 
         private void addTovar_Click(object sender, EventArgs e)
@@ -67,6 +70,44 @@ namespace Inventory
                 if (selectedProduct != null)
                 {
                     selectedProductId = selectedProduct.Id;
+                }
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            var searchText = searchTextBox.Text;
+            var products = mainController.SearchProductsByName(searchText);
+            chooseTovar.DataSource = products;
+            chooseTovar.DisplayMember = "Name";
+            chooseTovar.ValueMember = "Id";
+
+            searchResultsTextBox.Clear();
+
+            foreach (var product in products)
+            {
+                searchResultsTextBox.AppendText($"ID: {product.Id}, Name: {product.Name}, Quantity: {product.Quantity}, Price: {product.Price}, Postachalnik: {product.Postachalnik}{Environment.NewLine}");
+            }
+        }
+
+        private void exportToCSVButton_Click(object sender, EventArgs e)
+        {
+            var products = mainController.GetAllProducts();
+            using (var sfd = new SaveFileDialog())
+            {
+                sfd.Filter = "CSV files (*.csv)|*.csv";
+                sfd.FileName = "Products.csv";
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var sw = new StreamWriter(sfd.FileName, false, new UTF8Encoding(true)))
+                    {
+                        sw.WriteLine("ID,Name,Quantity,Price,Supplier");
+                        foreach (var product in products)
+                        {
+                            sw.WriteLine($"{product.Id},{product.Name},{product.Quantity},{product.Price},{product.Postachalnik}");
+                        }
+                    }
+                    MessageBox.Show("Products exported successfully!");
                 }
             }
         }

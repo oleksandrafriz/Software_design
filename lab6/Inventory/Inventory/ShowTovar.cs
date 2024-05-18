@@ -14,6 +14,7 @@ namespace Inventory
     public partial class ShowTovar : Form
     {
         private MainController mainController;
+
         public ShowTovar(MainController mainController)
         {
             InitializeComponent();
@@ -25,6 +26,19 @@ namespace Inventory
         {
             var products = mainController.GetAllProducts();
             dgvProducts.DataSource = products;
+        }
+
+        private void LoadProductsSorted(Func<Product, object> keySelector, bool ascending = true)
+        {
+            var products = mainController.GetAllProducts();
+            if (ascending)
+            {
+                dgvProducts.DataSource = products.OrderBy(keySelector).ToList();
+            }
+            else
+            {
+                dgvProducts.DataSource = products.OrderByDescending(keySelector).ToList();
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -54,6 +68,26 @@ namespace Inventory
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             LoadProducts();
+        }
+
+        private void sortByIdButton_Click(object sender, EventArgs e)
+        {
+            LoadProductsSorted(p => p.Id);
+        }
+
+        private void sortByNameButton_Click(object sender, EventArgs e)
+        {
+            LoadProductsSorted(p => p.Name);
+        }
+
+        private void sortByQuantityButton_Click(object sender, EventArgs e)
+        {
+            LoadProductsSorted(p => p.Quantity);
+        }
+
+        private void sortByPriceButton_Click(object sender, EventArgs e)
+        {
+            LoadProductsSorted(p => p.Price);
         }
     }
 }
