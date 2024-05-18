@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 
@@ -21,7 +14,11 @@ namespace Inventory
             InitializeComponent();
             this.mainController = mainController;
             this.productId = productId;
+            LoadProductData();
+        }
 
+        private void LoadProductData()
+        {
             var product = mainController.GetProductById(productId);
             if (product != null)
             {
@@ -46,11 +43,6 @@ namespace Inventory
             mainController.UpdateProduct(product);
             MessageBox.Show("Product updated successfully!");
             this.Close();
-        }
-
-        private void chooseTovar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

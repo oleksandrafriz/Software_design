@@ -31,7 +31,6 @@ namespace Inventory
         {
             this.saveEditedTovar = new System.Windows.Forms.Button();
             this.EditTovarLabel = new System.Windows.Forms.Label();
-            this.chooseTovarLabel = new System.Windows.Forms.Label();
             this.tovarNameEditLabel = new System.Windows.Forms.Label();
             this.quantityEditTovarLabel = new System.Windows.Forms.Label();
             this.priceTovarEditLabel = new System.Windows.Forms.Label();
@@ -40,7 +39,6 @@ namespace Inventory
             this.editedPriceTovar = new System.Windows.Forms.TextBox();
             this.editedQuantityTovar = new System.Windows.Forms.TextBox();
             this.editedTovarName = new System.Windows.Forms.TextBox();
-            this.chooseTovar = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // saveEditedTovar
@@ -61,15 +59,6 @@ namespace Inventory
             this.EditTovarLabel.Size = new System.Drawing.Size(177, 20);
             this.EditTovarLabel.TabIndex = 1;
             this.EditTovarLabel.Text = "Редагувати новий товар";
-            // 
-            // chooseTovarLabel
-            // 
-            this.chooseTovarLabel.AutoSize = true;
-            this.chooseTovarLabel.Location = new System.Drawing.Point(287, 109);
-            this.chooseTovarLabel.Name = "chooseTovarLabel";
-            this.chooseTovarLabel.Size = new System.Drawing.Size(134, 20);
-            this.chooseTovarLabel.TabIndex = 2;
-            this.chooseTovarLabel.Text = "Оберіть ID товару";
             // 
             // tovarNameEditLabel
             // 
@@ -135,21 +124,11 @@ namespace Inventory
             this.editedTovarName.Size = new System.Drawing.Size(125, 27);
             this.editedTovarName.TabIndex = 10;
             // 
-            // chooseTovar
-            // 
-            this.chooseTovar.FormattingEnabled = true;
-            this.chooseTovar.Location = new System.Drawing.Point(427, 106);
-            this.chooseTovar.Name = "chooseTovar";
-            this.chooseTovar.Size = new System.Drawing.Size(151, 28);
-            this.chooseTovar.TabIndex = 11;
-            this.chooseTovar.SelectedIndexChanged += new System.EventHandler(this.chooseTovar_SelectedIndexChanged);
-            // 
             // EditTovarPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.chooseTovar);
             this.Controls.Add(this.editedTovarName);
             this.Controls.Add(this.editedQuantityTovar);
             this.Controls.Add(this.editedPriceTovar);
@@ -158,7 +137,6 @@ namespace Inventory
             this.Controls.Add(this.priceTovarEditLabel);
             this.Controls.Add(this.quantityEditTovarLabel);
             this.Controls.Add(this.tovarNameEditLabel);
-            this.Controls.Add(this.chooseTovarLabel);
             this.Controls.Add(this.EditTovarLabel);
             this.Controls.Add(this.saveEditedTovar);
             this.Name = "EditTovarPage";
@@ -172,7 +150,6 @@ namespace Inventory
 
         private System.Windows.Forms.Button saveEditedTovar;
         private System.Windows.Forms.Label EditTovarLabel;
-        private System.Windows.Forms.Label chooseTovarLabel;
         private System.Windows.Forms.Label tovarNameEditLabel;
         private System.Windows.Forms.Label quantityEditTovarLabel;
         private System.Windows.Forms.Label priceTovarEditLabel;
@@ -181,6 +158,5 @@ namespace Inventory
         private System.Windows.Forms.TextBox editedPriceTovar;
         private System.Windows.Forms.TextBox editedQuantityTovar;
         private System.Windows.Forms.TextBox editedTovarName;
-        private System.Windows.Forms.ComboBox chooseTovar;
     }
 }
