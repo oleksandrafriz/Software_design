@@ -34,6 +34,10 @@ namespace Inventory
             this.updateButton = new System.Windows.Forms.Button();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.sortByIdButton = new System.Windows.Forms.Button();
+            this.sortByNameButton = new System.Windows.Forms.Button();
+            this.sortByQuantityButton = new System.Windows.Forms.Button();
+            this.sortByPriceButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,11 +89,55 @@ namespace Inventory
             this.dgvProducts.TabIndex = 4;
             this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
+            // sortByIdButton
+            // 
+            this.sortByIdButton.Location = new System.Drawing.Point(798, 144);
+            this.sortByIdButton.Name = "sortByIdButton";
+            this.sortByIdButton.Size = new System.Drawing.Size(94, 29);
+            this.sortByIdButton.TabIndex = 5;
+            this.sortByIdButton.Text = "button1";
+            this.sortByIdButton.UseVisualStyleBackColor = true;
+            this.sortByIdButton.Click += new System.EventHandler(this.sortByIdButton_Click);
+            // 
+            // sortByNameButton
+            // 
+            this.sortByNameButton.Location = new System.Drawing.Point(798, 202);
+            this.sortByNameButton.Name = "sortByNameButton";
+            this.sortByNameButton.Size = new System.Drawing.Size(94, 29);
+            this.sortByNameButton.TabIndex = 6;
+            this.sortByNameButton.Text = "button2";
+            this.sortByNameButton.UseVisualStyleBackColor = true;
+            this.sortByNameButton.Click += new System.EventHandler(this.sortByNameButton_Click);
+            // 
+            // sortByQuantityButton
+            // 
+            this.sortByQuantityButton.Location = new System.Drawing.Point(798, 263);
+            this.sortByQuantityButton.Name = "sortByQuantityButton";
+            this.sortByQuantityButton.Size = new System.Drawing.Size(94, 29);
+            this.sortByQuantityButton.TabIndex = 7;
+            this.sortByQuantityButton.Text = "button3";
+            this.sortByQuantityButton.UseVisualStyleBackColor = true;
+            this.sortByQuantityButton.Click += new System.EventHandler(this.sortByQuantityButton_Click);
+            // 
+            // sortByPriceButton
+            // 
+            this.sortByPriceButton.Location = new System.Drawing.Point(798, 313);
+            this.sortByPriceButton.Name = "sortByPriceButton";
+            this.sortByPriceButton.Size = new System.Drawing.Size(94, 29);
+            this.sortByPriceButton.TabIndex = 8;
+            this.sortByPriceButton.Text = "button4";
+            this.sortByPriceButton.UseVisualStyleBackColor = true;
+            this.sortByPriceButton.Click += new System.EventHandler(this.sortByPriceButton_Click);
+            // 
             // ShowTovar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(940, 450);
+            this.Controls.Add(this.sortByPriceButton);
+            this.Controls.Add(this.sortByQuantityButton);
+            this.Controls.Add(this.sortByNameButton);
+            this.Controls.Add(this.sortByIdButton);
             this.Controls.Add(this.dgvProducts);
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.updateButton);
@@ -110,5 +158,9 @@ namespace Inventory
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.DataGridView dgvProducts;
+        private System.Windows.Forms.Button sortByIdButton;
+        private System.Windows.Forms.Button sortByNameButton;
+        private System.Windows.Forms.Button sortByQuantityButton;
+        private System.Windows.Forms.Button sortByPriceButton;
     }
 }
