@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
@@ -16,6 +13,7 @@ namespace ClassLibrary
         {
             connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         }
+
         private MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
@@ -43,15 +41,14 @@ namespace ClassLibrary
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "UPDATE products SET Name = @Name, Description = @Description, Quantity = @Quantity, Price = @Price, Supplier = @Supplier WHERE Id = @Id";
+                var query = "UPDATE tovars SET tov_name = @tov_name, quantity = @quantity, price = @price, id_postach = @id_postach WHERE id_tovar = @id_tovar";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@Id", product.Id);
-                    cmd.Parameters.AddWithValue("@Name", product.Name);
-                    cmd.Parameters.AddWithValue("@Description", product.Description);
-                    cmd.Parameters.AddWithValue("@Quantity", product.Quantity);
-                    cmd.Parameters.AddWithValue("@Price", product.Price);
-                    cmd.Parameters.AddWithValue("@Supplier", product.Postachalnik);
+                    cmd.Parameters.AddWithValue("@id_tovar", product.Id);
+                    cmd.Parameters.AddWithValue("@tov_name", product.Name);
+                    cmd.Parameters.AddWithValue("@quantity", product.Quantity);
+                    cmd.Parameters.AddWithValue("@price", product.Price);
+                    cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -62,10 +59,10 @@ namespace ClassLibrary
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "DELETE FROM products WHERE Id = @Id";
+                var query = "DELETE FROM tovars WHERE id_tovar = @id_tovar";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@Id", productId);
+                    cmd.Parameters.AddWithValue("@id_tovar", productId);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -77,7 +74,7 @@ namespace ClassLibrary
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "SELECT * FROM products";
+                var query = "SELECT * FROM tovars";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
@@ -86,12 +83,11 @@ namespace ClassLibrary
                         {
                             var product = new Product
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Name = reader["Name"].ToString(),
-                                Description = reader["Description"].ToString(),
-                                Quantity = Convert.ToInt32(reader["Quantity"]),
-                                Price = Convert.ToDecimal(reader["Price"]),
-                                Postachalnik = reader["Postachalnik"].ToString()
+                                Id = Convert.ToInt32(reader["id_tovar"]),
+                                Name = reader["tov_name"].ToString(),
+                                Quantity = Convert.ToInt32(reader["quantity"]),
+                                Price = Convert.ToDecimal(reader["price"]),
+                                Postachalnik = reader["id_postach"].ToString()
                             };
                             products.Add(product);
                         }
@@ -107,22 +103,21 @@ namespace ClassLibrary
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "SELECT * FROM products WHERE Id = @Id";
+                var query = "SELECT * FROM tovars WHERE id_tovar = @id_tovar";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@Id", productId);
+                    cmd.Parameters.AddWithValue("@id_tovar", productId);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
                             product = new Product
                             {
-                                Id = Convert.ToInt32(reader["Id"]),
-                                Name = reader["Name"].ToString(),
-                                Description = reader["Description"].ToString(),
-                                Quantity = Convert.ToInt32(reader["Quantity"]),
-                                Price = Convert.ToDecimal(reader["Price"]),
-                                Postachalnik = reader["Postachalnik"].ToString()
+                                Id = Convert.ToInt32(reader["id_tovar"]),
+                                Name = reader["tov_name"].ToString(),
+                                Quantity = Convert.ToInt32(reader["quantity"]),
+                                Price = Convert.ToDecimal(reader["price"]),
+                                Postachalnik = reader["id_postach"].ToString()
                             };
                         }
                     }
