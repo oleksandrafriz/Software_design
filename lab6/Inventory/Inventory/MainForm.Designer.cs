@@ -38,6 +38,7 @@ namespace Inventory
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.searchResultsTextBox = new System.Windows.Forms.TextBox();
+            this.exportToCSVButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // addTovar
@@ -121,11 +122,22 @@ namespace Inventory
             this.searchResultsTextBox.Size = new System.Drawing.Size(125, 27);
             this.searchResultsTextBox.TabIndex = 8;
             // 
+            // exportToCSVButton
+            // 
+            this.exportToCSVButton.Location = new System.Drawing.Point(356, 462);
+            this.exportToCSVButton.Name = "exportToCSVButton";
+            this.exportToCSVButton.Size = new System.Drawing.Size(94, 29);
+            this.exportToCSVButton.TabIndex = 9;
+            this.exportToCSVButton.Text = "button1";
+            this.exportToCSVButton.UseVisualStyleBackColor = true;
+            this.exportToCSVButton.Click += new System.EventHandler(this.exportToCSVButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 519);
+            this.Controls.Add(this.exportToCSVButton);
             this.Controls.Add(this.searchResultsTextBox);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
@@ -153,6 +165,7 @@ namespace Inventory
         private System.Windows.Forms.TextBox searchTextBox;
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.TextBox searchResultsTextBox;
+        private System.Windows.Forms.Button exportToCSVButton;
     }
 }
 
