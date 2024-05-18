@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -11,7 +7,8 @@ namespace ClassLibrary
         void AddProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(int productId);
-        List<Product> GetAllProducts();
         Product GetProductById(int productId);
+        List<Product> GetAllProducts();
+        List<Product> SearchProductsByName(string name); // Add this method
     }
 }

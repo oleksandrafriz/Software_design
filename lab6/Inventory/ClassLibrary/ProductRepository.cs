@@ -7,7 +7,6 @@ namespace ClassLibrary
     public class ProductRepository : IProductRepository
     {
         private string connectionString;
-        private List<Product> products = new List<Product>();
 
         public ProductRepository()
         {
@@ -74,7 +73,17 @@ namespace ClassLibrary
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "SELECT * FROM tovars";
+                var query = @"
+            SELECT 
+                t.id_tovar, 
+                t.tov_name, 
+                t.quantity, 
+                t.price, 
+                p.name_postach 
+            FROM 
+                tovars t
+            JOIN 
+                postachalnik p ON t.id_postach = p.id_postach";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
@@ -87,7 +96,7 @@ namespace ClassLibrary
                                 Name = reader["tov_name"].ToString(),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 Price = Convert.ToDecimal(reader["price"]),
-                                Postachalnik = reader["id_postach"].ToString()
+                                Postachalnik = reader["name_postach"].ToString() // Витягуємо ім'я постачальника
                             };
                             products.Add(product);
                         }
@@ -124,6 +133,36 @@ namespace ClassLibrary
                 }
             }
             return product;
+        }
+
+        public List<Product> SearchProductsByName(string name)
+        {
+            var products = new List<Product>();
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                var query = "SELECT * FROM tovars WHERE tov_name LIKE @name";
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@name", "%" + name + "%");
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var product = new Product
+                            {
+                                Id = Convert.ToInt32(reader["id_tovar"]),
+                                Name = reader["tov_name"].ToString(),
+                                Quantity = Convert.ToInt32(reader["quantity"]),
+                                Price = Convert.ToDecimal(reader["price"]),
+                                //Postachalnik = reader["name_postach"].ToString()
+                            };
+                            products.Add(product);
+                        }
+                    }
+                }
+            }
+            return products;
         }
     }
 }

@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using ClassLibrary;
 
-namespace ClassLibrary
+namespace Inventory
 {
     public class MainController
     {
-        private IProductRepository productRepository;
+        private readonly IProductRepository productRepository;
+        private readonly ISupplierRepository supplierRepository;
 
-        public MainController(IProductRepository productRepository)
+        public MainController(IProductRepository productRepository, ISupplierRepository supplierRepository)
         {
             this.productRepository = productRepository;
+            this.supplierRepository = supplierRepository;
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            return productRepository.GetAllProducts();
+        }
+
+        public Product GetProductById(int productId)
+        {
+            return productRepository.GetProductById(productId);
         }
 
         public void AddProduct(Product product)
@@ -30,14 +39,14 @@ namespace ClassLibrary
             productRepository.DeleteProduct(productId);
         }
 
-        public List<Product> GetAllProducts()
+        public List<Product> SearchProductsByName(string productName)
         {
-            return productRepository.GetAllProducts();
+            return productRepository.SearchProductsByName(productName);
         }
 
-        public Product GetProductById(int productId)
+        public List<Postachalnik> GetAllSuppliers()
         {
-            return productRepository.GetProductById(productId);
+            return supplierRepository.GetAllSuppliers();
         }
     }
 }
