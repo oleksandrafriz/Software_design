@@ -43,92 +43,104 @@ namespace Inventory
             // 
             // saveNewTovar
             // 
-            this.saveNewTovar.Location = new System.Drawing.Point(296, 373);
+            this.saveNewTovar.BackColor = System.Drawing.Color.LightGreen;
+            this.saveNewTovar.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.saveNewTovar.Location = new System.Drawing.Point(133, 315);
             this.saveNewTovar.Name = "saveNewTovar";
-            this.saveNewTovar.Size = new System.Drawing.Size(94, 29);
+            this.saveNewTovar.Size = new System.Drawing.Size(160, 50);
             this.saveNewTovar.TabIndex = 0;
             this.saveNewTovar.Text = "Зберегти";
-            this.saveNewTovar.UseVisualStyleBackColor = true;
+            this.saveNewTovar.UseVisualStyleBackColor = false;
             this.saveNewTovar.Click += new System.EventHandler(this.saveNewTovar_Click);
             // 
             // AddTovarLabel
             // 
             this.AddTovarLabel.AutoSize = true;
-            this.AddTovarLabel.Location = new System.Drawing.Point(313, 66);
+            this.AddTovarLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.AddTovarLabel.Location = new System.Drawing.Point(85, 37);
             this.AddTovarLabel.Name = "AddTovarLabel";
-            this.AddTovarLabel.Size = new System.Drawing.Size(151, 20);
+            this.AddTovarLabel.Size = new System.Drawing.Size(291, 37);
             this.AddTovarLabel.TabIndex = 1;
             this.AddTovarLabel.Text = "Додати новий товар";
             // 
             // tovarNameLabel
             // 
             this.tovarNameLabel.AutoSize = true;
-            this.tovarNameLabel.Location = new System.Drawing.Point(222, 160);
+            this.tovarNameLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tovarNameLabel.Location = new System.Drawing.Point(37, 127);
             this.tovarNameLabel.Name = "tovarNameLabel";
-            this.tovarNameLabel.Size = new System.Drawing.Size(102, 20);
+            this.tovarNameLabel.Size = new System.Drawing.Size(134, 28);
             this.tovarNameLabel.TabIndex = 2;
             this.tovarNameLabel.Text = "Назва товару";
             // 
             // quantityTovarLabel
             // 
             this.quantityTovarLabel.AutoSize = true;
-            this.quantityTovarLabel.Location = new System.Drawing.Point(222, 204);
+            this.quantityTovarLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.quantityTovarLabel.Location = new System.Drawing.Point(37, 167);
             this.quantityTovarLabel.Name = "quantityTovarLabel";
-            this.quantityTovarLabel.Size = new System.Drawing.Size(121, 20);
+            this.quantityTovarLabel.Size = new System.Drawing.Size(160, 28);
             this.quantityTovarLabel.TabIndex = 3;
             this.quantityTovarLabel.Text = "Кількість товару";
             // 
             // priceTovarLabel
             // 
             this.priceTovarLabel.AutoSize = true;
-            this.priceTovarLabel.Location = new System.Drawing.Point(222, 251);
+            this.priceTovarLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.priceTovarLabel.Location = new System.Drawing.Point(37, 207);
             this.priceTovarLabel.Name = "priceTovarLabel";
-            this.priceTovarLabel.Size = new System.Drawing.Size(41, 20);
+            this.priceTovarLabel.Size = new System.Drawing.Size(54, 28);
             this.priceTovarLabel.TabIndex = 4;
             this.priceTovarLabel.Text = "Ціна";
             // 
             // postachTovarLabel
             // 
             this.postachTovarLabel.AutoSize = true;
-            this.postachTovarLabel.Location = new System.Drawing.Point(222, 306);
+            this.postachTovarLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.postachTovarLabel.Location = new System.Drawing.Point(37, 247);
             this.postachTovarLabel.Name = "postachTovarLabel";
-            this.postachTovarLabel.Size = new System.Drawing.Size(107, 20);
+            this.postachTovarLabel.Size = new System.Drawing.Size(141, 28);
             this.postachTovarLabel.TabIndex = 5;
             this.postachTovarLabel.Text = "Постачальник";
             // 
             // tovarName
             // 
-            this.tovarName.Location = new System.Drawing.Point(356, 153);
+            this.tovarName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tovarName.Location = new System.Drawing.Point(217, 124);
             this.tovarName.Name = "tovarName";
-            this.tovarName.Size = new System.Drawing.Size(125, 27);
+            this.tovarName.Size = new System.Drawing.Size(200, 34);
             this.tovarName.TabIndex = 6;
             // 
             // quantityTovar
             // 
-            this.quantityTovar.Location = new System.Drawing.Point(356, 201);
+            this.quantityTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.quantityTovar.Location = new System.Drawing.Point(217, 164);
             this.quantityTovar.Name = "quantityTovar";
-            this.quantityTovar.Size = new System.Drawing.Size(125, 27);
+            this.quantityTovar.Size = new System.Drawing.Size(200, 34);
             this.quantityTovar.TabIndex = 7;
             // 
             // priceTovar
             // 
-            this.priceTovar.Location = new System.Drawing.Point(356, 251);
+            this.priceTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.priceTovar.Location = new System.Drawing.Point(217, 204);
             this.priceTovar.Name = "priceTovar";
-            this.priceTovar.Size = new System.Drawing.Size(125, 27);
+            this.priceTovar.Size = new System.Drawing.Size(200, 34);
             this.priceTovar.TabIndex = 8;
             // 
             // postachTovar
             // 
-            this.postachTovar.Location = new System.Drawing.Point(356, 299);
+            this.postachTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.postachTovar.Location = new System.Drawing.Point(217, 244);
             this.postachTovar.Name = "postachTovar";
-            this.postachTovar.Size = new System.Drawing.Size(125, 27);
+            this.postachTovar.Size = new System.Drawing.Size(200, 34);
             this.postachTovar.TabIndex = 9;
             // 
             // AddTovarPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(445, 429);
             this.Controls.Add(this.postachTovar);
             this.Controls.Add(this.priceTovar);
             this.Controls.Add(this.quantityTovar);
@@ -140,7 +152,7 @@ namespace Inventory
             this.Controls.Add(this.AddTovarLabel);
             this.Controls.Add(this.saveNewTovar);
             this.Name = "AddTovarPage";
-            this.Text = "AddTovarPage";
+            this.Text = "Додати товар";
             this.ResumeLayout(false);
             this.PerformLayout();
 

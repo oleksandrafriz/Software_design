@@ -59,9 +59,22 @@ namespace Inventory
 
         private void searchButton_Click(object sender, EventArgs e)
         {
+            var searchText = searchTextBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                MessageBox.Show("Please enter a search term.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var products = mainController.GetAllProducts()
-                                    .Where(p => p.Name.Contains(searchTextBox.Text))
-                                    .ToList();
+                                         .Where(p => p.Name.Split(' ').Any(word => word.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+                                         .ToList();
+
+            if (products.Count == 0)
+            {
+                MessageBox.Show("No products found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             dgvProducts.DataSource = products;
         }
 

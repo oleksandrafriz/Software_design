@@ -76,17 +76,31 @@ namespace Inventory
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            var searchText = searchTextBox.Text;
+            var searchText = searchTextBox.Text.Trim();
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                MessageBox.Show("Please enter a search term.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var products = mainController.SearchProductsByName(searchText);
+            if (products.Count == 0)
+            {
+                MessageBox.Show("No products found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
             chooseTovar.DataSource = products;
             chooseTovar.DisplayMember = "Name";
             chooseTovar.ValueMember = "Id";
 
-            searchResultsTextBox.Clear();
+            searchResultsLabel.Text = "";
 
             foreach (var product in products)
             {
-                searchResultsTextBox.AppendText($"ID: {product.Id}, Name: {product.Name}, Quantity: {product.Quantity}, Price: {product.Price}, Postachalnik: {product.Postachalnik}{Environment.NewLine}");
+                searchResultsLabel.Text += $"ID: {product.Id},\n" +
+                                           $"Назва: {product.Name},\n" +
+                                           $"Кількість: {product.Quantity},\n" +
+                                           $"Ціна: {product.Price}{Environment.NewLine}";
             }
         }
 
@@ -101,7 +115,7 @@ namespace Inventory
                 {
                     using (var sw = new StreamWriter(sfd.FileName, false, new UTF8Encoding(true)))
                     {
-                        sw.WriteLine("ID,Name,Quantity,Price,Supplier");
+                        sw.WriteLine("ID,Назва,Кількість,Ціна,Постачальник");
                         foreach (var product in products)
                         {
                             sw.WriteLine($"{product.Id},{product.Name},{product.Quantity},{product.Price},{product.Postachalnik}");
@@ -110,6 +124,22 @@ namespace Inventory
                     MessageBox.Show("Products exported successfully!");
                 }
             }
+        }
+
+        private void searchResultsTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void postachalniki_Click(object sender, EventArgs e)
+        {
+            var showSuppliersForm = new ShowSuppliersForm(mainController);
+            showSuppliersForm.Show();
         }
     }
 }
