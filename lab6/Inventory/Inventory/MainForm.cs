@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ClassLibrary;
@@ -68,6 +69,24 @@ namespace Inventory
                 {
                     selectedProductId = selectedProduct.Id;
                 }
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            var searchText = searchTextBox.Text;
+            var products = mainController.SearchProductsByName(searchText);
+            chooseTovar.DataSource = products;
+            chooseTovar.DisplayMember = "Name";
+            chooseTovar.ValueMember = "Id";
+
+            // Clear previous search results
+            searchResultsTextBox.Clear();
+
+            // Display search results
+            foreach (var product in products)
+            {
+                searchResultsTextBox.AppendText($"ID: {product.Id}, Name: {product.Name}, Quantity: {product.Quantity}, Price: {product.Price}, Supplier: {product.Postachalnik}{Environment.NewLine}");
             }
         }
     }

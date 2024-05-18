@@ -35,6 +35,9 @@ namespace Inventory
             this.titleLabel = new System.Windows.Forms.Label();
             this.menuLabel = new System.Windows.Forms.Label();
             this.chooseTovar = new System.Windows.Forms.ComboBox();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.searchResultsTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // addTovar
@@ -94,11 +97,38 @@ namespace Inventory
             this.chooseTovar.TabIndex = 5;
             this.chooseTovar.SelectedIndexChanged += new System.EventHandler(this.chooseTovar_SelectedIndexChanged);
             // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Location = new System.Drawing.Point(266, 317);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(125, 27);
+            this.searchTextBox.TabIndex = 6;
+            // 
+            // searchButton
+            // 
+            this.searchButton.Location = new System.Drawing.Point(434, 317);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(94, 29);
+            this.searchButton.TabIndex = 7;
+            this.searchButton.Text = "button1";
+            this.searchButton.UseVisualStyleBackColor = true;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // searchResultsTextBox
+            // 
+            this.searchResultsTextBox.Location = new System.Drawing.Point(335, 384);
+            this.searchResultsTextBox.Name = "searchResultsTextBox";
+            this.searchResultsTextBox.Size = new System.Drawing.Size(125, 27);
+            this.searchResultsTextBox.TabIndex = 8;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.searchResultsTextBox);
+            this.Controls.Add(this.searchButton);
+            this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.chooseTovar);
             this.Controls.Add(this.menuLabel);
             this.Controls.Add(this.titleLabel);
@@ -120,6 +150,9 @@ namespace Inventory
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label menuLabel;
         private System.Windows.Forms.ComboBox chooseTovar;
+        private System.Windows.Forms.TextBox searchTextBox;
+        private System.Windows.Forms.Button searchButton;
+        private System.Windows.Forms.TextBox searchResultsTextBox;
     }
 }
 
