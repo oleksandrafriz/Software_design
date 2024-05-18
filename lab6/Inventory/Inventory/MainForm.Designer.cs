@@ -34,6 +34,7 @@ namespace Inventory
             this.tovars = new System.Windows.Forms.Button();
             this.titleLabel = new System.Windows.Forms.Label();
             this.menuLabel = new System.Windows.Forms.Label();
+            this.chooseTovar = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // addTovar
@@ -54,15 +55,17 @@ namespace Inventory
             this.editTovar.TabIndex = 1;
             this.editTovar.Text = "Редагувати товар";
             this.editTovar.UseVisualStyleBackColor = true;
+            this.editTovar.Click += new System.EventHandler(this.editTovar_Click);
             // 
             // tovars
             // 
-            this.tovars.Location = new System.Drawing.Point(356, 216);
+            this.tovars.Location = new System.Drawing.Point(335, 209);
             this.tovars.Name = "tovars";
-            this.tovars.Size = new System.Drawing.Size(94, 29);
+            this.tovars.Size = new System.Drawing.Size(157, 34);
             this.tovars.TabIndex = 2;
             this.tovars.Text = "Перегляд товарів";
             this.tovars.UseVisualStyleBackColor = true;
+            this.tovars.Click += new System.EventHandler(this.tovars_Click);
             // 
             // titleLabel
             // 
@@ -82,11 +85,21 @@ namespace Inventory
             this.menuLabel.TabIndex = 4;
             this.menuLabel.Text = "MENU";
             // 
+            // chooseTovar
+            // 
+            this.chooseTovar.FormattingEnabled = true;
+            this.chooseTovar.Location = new System.Drawing.Point(187, 161);
+            this.chooseTovar.Name = "chooseTovar";
+            this.chooseTovar.Size = new System.Drawing.Size(151, 28);
+            this.chooseTovar.TabIndex = 5;
+            this.chooseTovar.SelectedIndexChanged += new System.EventHandler(this.chooseTovar_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.chooseTovar);
             this.Controls.Add(this.menuLabel);
             this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.tovars);
@@ -106,6 +119,7 @@ namespace Inventory
         private System.Windows.Forms.Button tovars;
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.Label menuLabel;
+        private System.Windows.Forms.ComboBox chooseTovar;
     }
 }
 
