@@ -31,17 +31,39 @@ namespace Inventory
 
         private void saveEditedTovar_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrWhiteSpace(editedTovarName.Text) ||
+                string.IsNullOrWhiteSpace(editedQuantityTovar.Text) ||
+                string.IsNullOrWhiteSpace(editedPriceTovar.Text) ||
+                string.IsNullOrWhiteSpace(EditedPostachTovar.Text))
+            {
+                MessageBox.Show("Будь ласка, заповніть усі поля.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!int.TryParse(editedQuantityTovar.Text, out int quantity))
+            {
+                MessageBox.Show("Кількість має бути дійсним цілим числом.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!decimal.TryParse(editedPriceTovar.Text, out decimal price))
+            {
+                MessageBox.Show("Ціна має бути дійсним десятковим числом.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var product = new Product
             {
                 Id = productId,
                 Name = editedTovarName.Text,
-                Quantity = int.Parse(editedQuantityTovar.Text),
-                Price = decimal.Parse(editedPriceTovar.Text),
+                Quantity = quantity,
+                Price = price,
                 Postachalnik = EditedPostachTovar.Text
             };
 
             mainController.UpdateProduct(product);
-            MessageBox.Show("Product updated successfully!");
+            MessageBox.Show("Продукт успішно оновлено!");
             this.Close();
         }
     }
