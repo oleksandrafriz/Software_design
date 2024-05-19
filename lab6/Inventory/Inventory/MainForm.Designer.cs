@@ -29,6 +29,7 @@ namespace Inventory
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.addTovar = new System.Windows.Forms.Button();
             this.editTovar = new System.Windows.Forms.Button();
             this.tovars = new System.Windows.Forms.Button();
@@ -90,7 +91,7 @@ namespace Inventory
             this.titleLabel.AutoSize = true;
             this.titleLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.titleLabel.ForeColor = System.Drawing.Color.White;
-            this.titleLabel.Location = new System.Drawing.Point(250, 20);
+            this.titleLabel.Location = new System.Drawing.Point(201, 25);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(298, 37);
             this.titleLabel.TabIndex = 3;
@@ -167,7 +168,7 @@ namespace Inventory
             this.exportToCSVButton.BackColor = System.Drawing.Color.SteelBlue;
             this.exportToCSVButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.exportToCSVButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exportToCSVButton.Location = new System.Drawing.Point(399, 3);
+            this.exportToCSVButton.Location = new System.Drawing.Point(306, 3);
             this.exportToCSVButton.Name = "exportToCSVButton";
             this.exportToCSVButton.Size = new System.Drawing.Size(95, 44);
             this.exportToCSVButton.TabIndex = 9;
@@ -219,6 +220,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(693, 519);
             this.Controls.Add(this.searchResultsLabel);
             this.Controls.Add(this.label1);
