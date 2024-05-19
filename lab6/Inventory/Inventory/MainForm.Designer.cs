@@ -44,10 +44,12 @@ namespace Inventory
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.searchResultsLabel = new System.Windows.Forms.Label();
+            this.searchResultsDataGridView = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             this.headerPanel.SuspendLayout();
             this.menuPanel.SuspendLayout();
             this.footerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // addTovar
@@ -113,7 +115,7 @@ namespace Inventory
             this.chooseTovar.FormattingEnabled = true;
             this.chooseTovar.Location = new System.Drawing.Point(488, 99);
             this.chooseTovar.Name = "chooseTovar";
-            this.chooseTovar.Size = new System.Drawing.Size(152, 28);
+            this.chooseTovar.Size = new System.Drawing.Size(181, 28);
             this.chooseTovar.TabIndex = 5;
             this.chooseTovar.SelectedIndexChanged += new System.EventHandler(this.chooseTovar_SelectedIndexChanged);
             // 
@@ -205,15 +207,26 @@ namespace Inventory
             this.label1.TabIndex = 9;
             this.label1.Text = "Оберіть товар для редагування";
             // 
-            // searchResultsLabel
+            // searchResultsDataGridView
             // 
-            this.searchResultsLabel.AutoSize = true;
-            this.searchResultsLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.searchResultsLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.searchResultsLabel.Location = new System.Drawing.Point(240, 260);
-            this.searchResultsLabel.Name = "searchResultsLabel";
-            this.searchResultsLabel.Size = new System.Drawing.Size(2, 30);
-            this.searchResultsLabel.TabIndex = 10;
+            this.searchResultsDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.searchResultsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchResultsDataGridView.Location = new System.Drawing.Point(217, 283);
+            this.searchResultsDataGridView.Name = "searchResultsDataGridView";
+            this.searchResultsDataGridView.RowHeadersWidth = 51;
+            this.searchResultsDataGridView.RowTemplate.Height = 29;
+            this.searchResultsDataGridView.Size = new System.Drawing.Size(443, 122);
+            this.searchResultsDataGridView.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Black", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(226, 260);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(220, 20);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Результати пошуку товарів";
             // 
             // MainForm
             // 
@@ -222,7 +235,8 @@ namespace Inventory
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(693, 519);
-            this.Controls.Add(this.searchResultsLabel);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.searchResultsDataGridView);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.searchTextBox);
@@ -237,6 +251,7 @@ namespace Inventory
             this.menuPanel.ResumeLayout(false);
             this.menuPanel.PerformLayout();
             this.footerPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.searchResultsDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,8 +272,9 @@ namespace Inventory
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button exportToCSVButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label searchResultsLabel;
         private System.Windows.Forms.Button postachalniki;
+        private System.Windows.Forms.DataGridView searchResultsDataGridView;
+        private System.Windows.Forms.Label label2;
     }
 }
 

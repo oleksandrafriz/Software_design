@@ -60,6 +60,7 @@ namespace Inventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::Inventory.Properties.Resources.back3;
             this.ClientSize = new System.Drawing.Size(774, 296);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvSuppliers);

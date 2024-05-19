@@ -108,7 +108,7 @@ namespace Inventory
             this.tovarName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tovarName.Location = new System.Drawing.Point(217, 124);
             this.tovarName.Name = "tovarName";
-            this.tovarName.Size = new System.Drawing.Size(200, 34);
+            this.tovarName.Size = new System.Drawing.Size(246, 34);
             this.tovarName.TabIndex = 6;
             // 
             // quantityTovar
@@ -116,7 +116,7 @@ namespace Inventory
             this.quantityTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.quantityTovar.Location = new System.Drawing.Point(217, 164);
             this.quantityTovar.Name = "quantityTovar";
-            this.quantityTovar.Size = new System.Drawing.Size(200, 34);
+            this.quantityTovar.Size = new System.Drawing.Size(246, 34);
             this.quantityTovar.TabIndex = 7;
             // 
             // priceTovar
@@ -124,7 +124,7 @@ namespace Inventory
             this.priceTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.priceTovar.Location = new System.Drawing.Point(217, 204);
             this.priceTovar.Name = "priceTovar";
-            this.priceTovar.Size = new System.Drawing.Size(200, 34);
+            this.priceTovar.Size = new System.Drawing.Size(246, 34);
             this.priceTovar.TabIndex = 8;
             // 
             // postachTovar
@@ -132,7 +132,7 @@ namespace Inventory
             this.postachTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.postachTovar.Location = new System.Drawing.Point(217, 244);
             this.postachTovar.Name = "postachTovar";
-            this.postachTovar.Size = new System.Drawing.Size(200, 34);
+            this.postachTovar.Size = new System.Drawing.Size(246, 34);
             this.postachTovar.TabIndex = 9;
             // 
             // AddTovarPage
@@ -140,7 +140,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(445, 429);
+            this.ClientSize = new System.Drawing.Size(475, 429);
             this.Controls.Add(this.postachTovar);
             this.Controls.Add(this.priceTovar);
             this.Controls.Add(this.quantityTovar);

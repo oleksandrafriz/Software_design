@@ -151,6 +151,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.BackgroundImage = global::Inventory.Properties.Resources.back2;
             this.ClientSize = new System.Drawing.Size(1092, 506);
             this.Controls.Add(this.sortByPriceButton);
             this.Controls.Add(this.sortByQuantityButton);

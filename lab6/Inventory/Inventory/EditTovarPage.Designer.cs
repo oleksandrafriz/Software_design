@@ -108,7 +108,7 @@ namespace Inventory
             this.EditedPostachTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.EditedPostachTovar.Location = new System.Drawing.Point(190, 252);
             this.EditedPostachTovar.Name = "EditedPostachTovar";
-            this.EditedPostachTovar.Size = new System.Drawing.Size(200, 34);
+            this.EditedPostachTovar.Size = new System.Drawing.Size(270, 34);
             this.EditedPostachTovar.TabIndex = 7;
             // 
             // editedPriceTovar
@@ -116,7 +116,7 @@ namespace Inventory
             this.editedPriceTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.editedPriceTovar.Location = new System.Drawing.Point(190, 212);
             this.editedPriceTovar.Name = "editedPriceTovar";
-            this.editedPriceTovar.Size = new System.Drawing.Size(200, 34);
+            this.editedPriceTovar.Size = new System.Drawing.Size(270, 34);
             this.editedPriceTovar.TabIndex = 8;
             // 
             // editedQuantityTovar
@@ -124,7 +124,7 @@ namespace Inventory
             this.editedQuantityTovar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.editedQuantityTovar.Location = new System.Drawing.Point(190, 172);
             this.editedQuantityTovar.Name = "editedQuantityTovar";
-            this.editedQuantityTovar.Size = new System.Drawing.Size(200, 34);
+            this.editedQuantityTovar.Size = new System.Drawing.Size(270, 34);
             this.editedQuantityTovar.TabIndex = 9;
             // 
             // editedTovarName
@@ -132,7 +132,7 @@ namespace Inventory
             this.editedTovarName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.editedTovarName.Location = new System.Drawing.Point(190, 132);
             this.editedTovarName.Name = "editedTovarName";
-            this.editedTovarName.Size = new System.Drawing.Size(200, 34);
+            this.editedTovarName.Size = new System.Drawing.Size(270, 34);
             this.editedTovarName.TabIndex = 10;
             // 
             // EditTovarPage
@@ -140,7 +140,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(438, 445);
+            this.ClientSize = new System.Drawing.Size(489, 445);
             this.Controls.Add(this.editedTovarName);
             this.Controls.Add(this.editedQuantityTovar);
             this.Controls.Add(this.editedPriceTovar);
