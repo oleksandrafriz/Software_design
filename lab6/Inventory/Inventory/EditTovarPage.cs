@@ -6,20 +6,20 @@ namespace Inventory
 {
     public partial class EditTovarPage : Form
     {
-        private MainController mainController;
-        private int productId;
+        private readonly MainController _mainController;
+        private readonly int _productId;
 
         public EditTovarPage(MainController mainController, int productId)
         {
             InitializeComponent();
-            this.mainController = mainController;
-            this.productId = productId;
+            _mainController = mainController ?? throw new ArgumentNullException(nameof(mainController));
+            _productId = productId;
             LoadProductData();
         }
 
         private void LoadProductData()
         {
-            var product = mainController.GetProductById(productId);
+            var product = _mainController.GetProductById(_productId);
             if (product != null)
             {
                 editedTovarName.Text = product.Name;
@@ -27,44 +27,62 @@ namespace Inventory
                 editedPriceTovar.Text = product.Price.ToString();
                 EditedPostachTovar.Text = product.Postachalnik;
             }
+            else
+            {
+                MessageBox.Show("Продукт не знайдено.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
         }
 
-        private void saveEditedTovar_Click(object sender, EventArgs e)
+        private void SaveEditedTovar_Click(object sender, EventArgs e)
         {
+            if (ValidateInputs(out string name, out int quantity, out decimal price, out string postachalnik))
+            {
+                var product = new Product
+                {
+                    Id = _productId,
+                    Name = name,
+                    Quantity = quantity,
+                    Price = price,
+                    Postachalnik = postachalnik
+                };
 
-            if (string.IsNullOrWhiteSpace(editedTovarName.Text) ||
+                _mainController.UpdateProduct(product);
+                MessageBox.Show("Продукт успішно оновлено!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+        }
+
+        private bool ValidateInputs(out string name, out int quantity, out decimal price, out string postachalnik)
+        {
+            name = editedTovarName.Text;
+            postachalnik = EditedPostachTovar.Text;
+
+            if (string.IsNullOrWhiteSpace(name) ||
                 string.IsNullOrWhiteSpace(editedQuantityTovar.Text) ||
                 string.IsNullOrWhiteSpace(editedPriceTovar.Text) ||
-                string.IsNullOrWhiteSpace(EditedPostachTovar.Text))
+                string.IsNullOrWhiteSpace(postachalnik))
             {
                 MessageBox.Show("Будь ласка, заповніть усі поля.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                quantity = 0;
+                price = 0;
+                return false;
             }
 
-            if (!int.TryParse(editedQuantityTovar.Text, out int quantity))
+            if (!int.TryParse(editedQuantityTovar.Text, out quantity))
             {
                 MessageBox.Show("Кількість має бути дійсним цілим числом.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                price = 0;
+                return false;
             }
 
-            if (!decimal.TryParse(editedPriceTovar.Text, out decimal price))
+            if (!decimal.TryParse(editedPriceTovar.Text, out price))
             {
                 MessageBox.Show("Ціна має бути дійсним десятковим числом.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                return false;
             }
 
-            var product = new Product
-            {
-                Id = productId,
-                Name = editedTovarName.Text,
-                Quantity = quantity,
-                Price = price,
-                Postachalnik = EditedPostachTovar.Text
-            };
-
-            mainController.UpdateProduct(product);
-            MessageBox.Show("Продукт успішно оновлено!");
-            this.Close();
+            return true;
         }
     }
 }
