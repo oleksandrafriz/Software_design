@@ -96,7 +96,7 @@ namespace ClassLibrary
                                 Name = reader["tov_name"].ToString(),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 Price = Convert.ToDecimal(reader["price"]),
-                                Postachalnik = reader["name_postach"].ToString() // Витягуємо ім'я постачальника
+                                Postachalnik = reader["name_postach"].ToString()
                             };
                             products.Add(product);
                         }

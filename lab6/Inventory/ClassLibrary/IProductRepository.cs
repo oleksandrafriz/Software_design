@@ -9,6 +9,6 @@ namespace ClassLibrary
         void DeleteProduct(int productId);
         Product GetProductById(int productId);
         List<Product> GetAllProducts();
-        List<Product> SearchProductsByName(string name); // Add this method
+        List<Product> SearchProductsByName(string name);
     }
 }
