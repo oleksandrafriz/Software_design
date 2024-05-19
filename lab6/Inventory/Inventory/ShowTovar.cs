@@ -26,6 +26,12 @@ namespace Inventory
         {
             var products = mainController.GetAllProducts();
             dgvProducts.DataSource = products;
+
+            dgvProducts.Columns["Id"].HeaderText = "ID товару";
+            dgvProducts.Columns["Name"].HeaderText = "Назва товару";
+            dgvProducts.Columns["Quantity"].HeaderText = "Кількість";
+            dgvProducts.Columns["Price"].HeaderText = "Ціна";
+            dgvProducts.Columns["Postachalnik"].HeaderText = "Постачальник";
         }
 
         private void LoadProductsSorted(Func<Product, object> keySelector, bool ascending = true)
@@ -48,7 +54,7 @@ namespace Inventory
                 var productId = (int)dgvProducts.SelectedRows[0].Cells[0].Value;
                 mainController.DeleteProduct(productId);
                 LoadProducts();
-                MessageBox.Show("Product deleted successfully!");
+                MessageBox.Show("Продукт успішно видалено!");
             }
         }
 
@@ -62,7 +68,7 @@ namespace Inventory
             var searchText = searchTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                MessageBox.Show("Please enter a search term.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Будь ласка, введіть пошуковий термін.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -72,7 +78,7 @@ namespace Inventory
 
             if (products.Count == 0)
             {
-                MessageBox.Show("No products found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Не знайдено продуктів, що відповідають пошуковому терміну.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             dgvProducts.DataSource = products;
