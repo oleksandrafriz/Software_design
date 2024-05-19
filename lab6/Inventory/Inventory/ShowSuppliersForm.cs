@@ -17,8 +17,25 @@ namespace Inventory
 
         private void LoadSuppliers()
         {
-            var suppliers = mainController.GetAllSuppliers();
+            try
+            {
+                var suppliers = mainController.GetAllSuppliers();
+                DisplaySuppliers(suppliers);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading suppliers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DisplaySuppliers(object suppliers)
+        {
             dgvSuppliers.DataSource = suppliers;
+            SetColumnHeaders();
+        }
+
+        private void SetColumnHeaders()
+        {
             dgvSuppliers.Columns["Id"].HeaderText = "ID Постачальника";
             dgvSuppliers.Columns["Name"].HeaderText = "Ім'я Постачальника";
             dgvSuppliers.Columns["Address"].HeaderText = "Адреса";
