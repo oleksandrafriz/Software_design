@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
+using System.Configuration;
 
 namespace Inventory
 {
@@ -15,9 +16,11 @@ namespace Inventory
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var productRepository = new ProductRepository();
-            var supplierRepository = new SupplierRepository(); // Додайте це
-            var mainController = new MainController(productRepository, supplierRepository); // Передайте сюди supplierRepository
+            string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+
+            var productRepository = new ProductRepository(connectionString);
+            var supplierRepository = new SupplierRepository();
+            var mainController = new MainController(productRepository, supplierRepository);
 
             Application.Run(new MainForm(mainController));
         }

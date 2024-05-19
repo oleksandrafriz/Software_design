@@ -6,163 +6,179 @@ namespace ClassLibrary
 {
     public class ProductRepository : IProductRepository
     {
-        private string connectionString;
+        private readonly string _connectionString;
 
-        public ProductRepository()
+        public ProductRepository(string connectionString)
         {
-            connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
         private MySqlConnection GetConnection()
         {
-            return new MySqlConnection(connectionString);
+            return new MySqlConnection(_connectionString);
         }
 
         public void AddProduct(Product product)
         {
-            using (var connection = GetConnection())
+            const string query = "INSERT INTO tovars (tov_name, quantity, price, id_postach) VALUES (@tov_name, @quantity, @price, @id_postach)";
+            ExecuteNonQuery(query, cmd =>
             {
-                connection.Open();
-                var query = "INSERT INTO tovars (tov_name, quantity, price, id_postach) VALUES (@tov_name, @quantity, @price, @id_postach)";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@tov_name", product.Name);
-                    cmd.Parameters.AddWithValue("@quantity", product.Quantity);
-                    cmd.Parameters.AddWithValue("@price", product.Price);
-                    cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
-                    cmd.ExecuteNonQuery();
-                }
-            }
+                cmd.Parameters.AddWithValue("@tov_name", product.Name);
+                cmd.Parameters.AddWithValue("@quantity", product.Quantity);
+                cmd.Parameters.AddWithValue("@price", product.Price);
+                cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
+            });
         }
 
         public void UpdateProduct(Product product)
         {
-            using (var connection = GetConnection())
+            const string query = "UPDATE tovars SET tov_name = @tov_name, quantity = @quantity, price = @price, id_postach = @id_postach WHERE id_tovar = @id_tovar";
+            ExecuteNonQuery(query, cmd =>
             {
-                connection.Open();
-                var query = "UPDATE tovars SET tov_name = @tov_name, quantity = @quantity, price = @price, id_postach = @id_postach WHERE id_tovar = @id_tovar";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@id_tovar", product.Id);
-                    cmd.Parameters.AddWithValue("@tov_name", product.Name);
-                    cmd.Parameters.AddWithValue("@quantity", product.Quantity);
-                    cmd.Parameters.AddWithValue("@price", product.Price);
-                    cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
-                    cmd.ExecuteNonQuery();
-                }
-            }
+                cmd.Parameters.AddWithValue("@id_tovar", product.Id);
+                cmd.Parameters.AddWithValue("@tov_name", product.Name);
+                cmd.Parameters.AddWithValue("@quantity", product.Quantity);
+                cmd.Parameters.AddWithValue("@price", product.Price);
+                cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
+            });
         }
 
         public void DeleteProduct(int productId)
         {
+            const string query = "DELETE FROM tovars WHERE id_tovar = @id_tovar";
+            ExecuteNonQuery(query, cmd =>
+            {
+                cmd.Parameters.AddWithValue("@id_tovar", productId);
+            });
+        }
+
+        public List<Product> GetAllProducts()
+        {
+            const string query = @"
+                SELECT 
+                    t.id_tovar, 
+                    t.tov_name, 
+                    t.quantity, 
+                    t.price, 
+                    p.name_postach 
+                FROM 
+                    tovars t
+                JOIN 
+                    postachalnik p ON t.id_postach = p.id_postach";
+            return ExecuteReader(query, reader => new Product
+            {
+                Id = Convert.ToInt32(reader["id_tovar"]),
+                Name = reader["tov_name"].ToString(),
+                Quantity = Convert.ToInt32(reader["quantity"]),
+                Price = Convert.ToDecimal(reader["price"]),
+                Postachalnik = reader["name_postach"].ToString()
+            });
+        }
+
+        public Product GetProductById(int productId)
+        {
+            const string query = "SELECT * FROM tovars WHERE id_tovar = @id_tovar";
+            return ExecuteReaderSingle(query, cmd =>
+            {
+                cmd.Parameters.AddWithValue("@id_tovar", productId);
+            }, reader => new Product
+            {
+                Id = Convert.ToInt32(reader["id_tovar"]),
+                Name = reader["tov_name"].ToString(),
+                Quantity = Convert.ToInt32(reader["quantity"]),
+                Price = Convert.ToDecimal(reader["price"]),
+                Postachalnik = reader["id_postach"].ToString()
+            });
+        }
+
+        public List<Product> SearchProductsByName(string name)
+        {
+            const string query = "SELECT * FROM tovars WHERE tov_name LIKE @name";
+            return ExecuteReader(query, cmd =>
+            {
+                cmd.Parameters.AddWithValue("@name", "%" + name + "%");
+            }, reader => new Product
+            {
+                Id = Convert.ToInt32(reader["id_tovar"]),
+                Name = reader["tov_name"].ToString(),
+                Quantity = Convert.ToInt32(reader["quantity"]),
+                Price = Convert.ToDecimal(reader["price"])
+            });
+        }
+
+        private void ExecuteNonQuery(string query, Action<MySqlCommand> parameterize)
+        {
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "DELETE FROM tovars WHERE id_tovar = @id_tovar";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id_tovar", productId);
+                    parameterize(cmd);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
-        public List<Product> GetAllProducts()
+        private List<Product> ExecuteReader(string query, Func<MySqlDataReader, Product> readRow)
         {
-            var products = new List<Product>();
+            var result = new List<Product>();
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = @"
-            SELECT 
-                t.id_tovar, 
-                t.tov_name, 
-                t.quantity, 
-                t.price, 
-                p.name_postach 
-            FROM 
-                tovars t
-            JOIN 
-                postachalnik p ON t.id_postach = p.id_postach";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var product = new Product
-                            {
-                                Id = Convert.ToInt32(reader["id_tovar"]),
-                                Name = reader["tov_name"].ToString(),
-                                Quantity = Convert.ToInt32(reader["quantity"]),
-                                Price = Convert.ToDecimal(reader["price"]),
-                                Postachalnik = reader["name_postach"].ToString()
-                            };
-                            products.Add(product);
+                            result.Add(readRow(reader));
                         }
                     }
                 }
             }
-            return products;
+            return result;
         }
 
-        public Product GetProductById(int productId)
+        private List<Product> ExecuteReader(string query, Action<MySqlCommand> parameterize, Func<MySqlDataReader, Product> readRow)
         {
-            Product product = null;
+            var result = new List<Product>();
             using (var connection = GetConnection())
             {
                 connection.Open();
-                var query = "SELECT * FROM tovars WHERE id_tovar = @id_tovar";
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    cmd.Parameters.AddWithValue("@id_tovar", productId);
+                    parameterize(cmd);
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(readRow(reader));
+                        }
+                    }
+                }
+            }
+            return result;
+        }
+
+        private Product ExecuteReaderSingle(string query, Action<MySqlCommand> parameterize, Func<MySqlDataReader, Product> readRow)
+        {
+            Product result = null;
+            using (var connection = GetConnection())
+            {
+                connection.Open();
+                using (var cmd = new MySqlCommand(query, connection))
+                {
+                    parameterize(cmd);
                     using (var reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            product = new Product
-                            {
-                                Id = Convert.ToInt32(reader["id_tovar"]),
-                                Name = reader["tov_name"].ToString(),
-                                Quantity = Convert.ToInt32(reader["quantity"]),
-                                Price = Convert.ToDecimal(reader["price"]),
-                                Postachalnik = reader["id_postach"].ToString()
-                            };
+                            result = readRow(reader);
                         }
                     }
                 }
             }
-            return product;
-        }
-
-        public List<Product> SearchProductsByName(string name)
-        {
-            var products = new List<Product>();
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-                var query = "SELECT * FROM tovars WHERE tov_name LIKE @name";
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    cmd.Parameters.AddWithValue("@name", "%" + name + "%");
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            var product = new Product
-                            {
-                                Id = Convert.ToInt32(reader["id_tovar"]),
-                                Name = reader["tov_name"].ToString(),
-                                Quantity = Convert.ToInt32(reader["quantity"]),
-                                Price = Convert.ToDecimal(reader["price"]),
-                                //Postachalnik = reader["name_postach"].ToString()
-                            };
-                            products.Add(product);
-                        }
-                    }
-                }
-            }
-            return products;
+            return result;
         }
     }
 }
