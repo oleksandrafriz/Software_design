@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClassLibrary;
 
@@ -13,57 +7,59 @@ namespace Inventory
 {
     public partial class ShowTovar : Form
     {
-        private MainController mainController;
+        private readonly MainController _mainController;
 
         public ShowTovar(MainController mainController)
         {
             InitializeComponent();
-            this.mainController = mainController;
+            _mainController = mainController ?? throw new ArgumentNullException(nameof(mainController));
             LoadProducts();
         }
 
         private void LoadProducts()
         {
-            var products = mainController.GetAllProducts();
-            dgvProducts.DataSource = products;
+            try
+            {
+                var products = _mainController.GetAllProducts();
+                dgvProducts.DataSource = products;
 
-            dgvProducts.Columns["Id"].HeaderText = "ID товару";
-            dgvProducts.Columns["Name"].HeaderText = "Назва товару";
-            dgvProducts.Columns["Quantity"].HeaderText = "Кількість";
-            dgvProducts.Columns["Price"].HeaderText = "Ціна";
-            dgvProducts.Columns["Postachalnik"].HeaderText = "Постачальник";
+                dgvProducts.Columns["Id"].HeaderText = "ID товару";
+                dgvProducts.Columns["Name"].HeaderText = "Назва товару";
+                dgvProducts.Columns["Quantity"].HeaderText = "Кількість";
+                dgvProducts.Columns["Price"].HeaderText = "Ціна";
+                dgvProducts.Columns["Postachalnik"].HeaderText = "Постачальник";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка завантаження продуктів: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadProductsSorted(Func<Product, object> keySelector, bool ascending = true)
         {
-            var products = mainController.GetAllProducts();
-            if (ascending)
-            {
-                dgvProducts.DataSource = products.OrderBy(keySelector).ToList();
-            }
-            else
-            {
-                dgvProducts.DataSource = products.OrderByDescending(keySelector).ToList();
-            }
+            var products = _mainController.GetAllProducts();
+            dgvProducts.DataSource = ascending
+                ? products.OrderBy(keySelector).ToList()
+                : products.OrderByDescending(keySelector).ToList();
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             if (dgvProducts.SelectedRows.Count > 0)
             {
                 var productId = (int)dgvProducts.SelectedRows[0].Cells[0].Value;
-                mainController.DeleteProduct(productId);
+                _mainController.DeleteProduct(productId);
                 LoadProducts();
-                MessageBox.Show("Продукт успішно видалено!");
+                MessageBox.Show("Продукт успішно видалено!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        private void updateButton_Click(object sender, EventArgs e)
+        private void UpdateButton_Click(object sender, EventArgs e)
         {
             LoadProducts();
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private void SearchButton_Click(object sender, EventArgs e)
         {
             var searchText = searchTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
@@ -72,9 +68,10 @@ namespace Inventory
                 return;
             }
 
-            var products = mainController.GetAllProducts()
-                                         .Where(p => p.Name.Split(' ').Any(word => word.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
-                                         .ToList();
+            var products = _mainController.GetAllProducts()
+                                          .Where(p => p.Name.Split(' ')
+                                          .Any(word => word.Contains(searchText, StringComparison.OrdinalIgnoreCase)))
+                                          .ToList();
 
             if (products.Count == 0)
             {
@@ -84,27 +81,22 @@ namespace Inventory
             dgvProducts.DataSource = products;
         }
 
-        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            LoadProducts();
-        }
-
-        private void sortByIdButton_Click(object sender, EventArgs e)
+        private void SortByIdButton_Click(object sender, EventArgs e)
         {
             LoadProductsSorted(p => p.Id);
         }
 
-        private void sortByNameButton_Click(object sender, EventArgs e)
+        private void SortByNameButton_Click(object sender, EventArgs e)
         {
             LoadProductsSorted(p => p.Name);
         }
 
-        private void sortByQuantityButton_Click(object sender, EventArgs e)
+        private void SortByQuantityButton_Click(object sender, EventArgs e)
         {
             LoadProductsSorted(p => p.Quantity);
         }
 
-        private void sortByPriceButton_Click(object sender, EventArgs e)
+        private void SortByPriceButton_Click(object sender, EventArgs e)
         {
             LoadProductsSorted(p => p.Price);
         }
