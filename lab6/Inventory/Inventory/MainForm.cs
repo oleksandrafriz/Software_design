@@ -13,6 +13,7 @@ namespace Inventory
         private MainController mainController;
         private int selectedProductId;
 
+
         public MainForm(MainController mainController)
         {
             InitializeComponent();
@@ -89,9 +90,9 @@ namespace Inventory
                 MessageBox.Show("Не знайдено продуктів, що відповідають пошуковому терміну.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            chooseTovar.DataSource = products;
-            chooseTovar.DisplayMember = "Name";
-            chooseTovar.ValueMember = "Id";
+            //chooseTovar.DataSource = products;
+            //chooseTovar.DisplayMember = "Name";
+            //chooseTovar.ValueMember = "Id";
 
             searchResultsLabel.Text = "";
 
@@ -131,6 +132,16 @@ namespace Inventory
         {
             var showSuppliersForm = new ShowSuppliersForm(mainController);
             showSuppliersForm.Show();
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void searchResultsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

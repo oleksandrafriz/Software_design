@@ -123,7 +123,7 @@ namespace Inventory
             this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.headerPanel.Location = new System.Drawing.Point(0, 0);
             this.headerPanel.Name = "headerPanel";
-            this.headerPanel.Size = new System.Drawing.Size(937, 80);
+            this.headerPanel.Size = new System.Drawing.Size(693, 80);
             this.headerPanel.TabIndex = 6;
             // 
             // menuPanel
@@ -159,7 +159,7 @@ namespace Inventory
             this.footerPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.footerPanel.Location = new System.Drawing.Point(0, 469);
             this.footerPanel.Name = "footerPanel";
-            this.footerPanel.Size = new System.Drawing.Size(937, 50);
+            this.footerPanel.Size = new System.Drawing.Size(693, 50);
             this.footerPanel.TabIndex = 8;
             // 
             // exportToCSVButton
@@ -219,7 +219,7 @@ namespace Inventory
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(937, 519);
+            this.ClientSize = new System.Drawing.Size(693, 519);
             this.Controls.Add(this.searchResultsLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.searchButton);
