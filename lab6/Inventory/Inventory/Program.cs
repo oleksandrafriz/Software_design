@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 using ClassLibrary;
-using System.Configuration;
 
 namespace Inventory
 {
@@ -19,7 +16,7 @@ namespace Inventory
             string connectionString = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
 
             var productRepository = new ProductRepository(connectionString);
-            var supplierRepository = new SupplierRepository();
+            var supplierRepository = new SupplierRepository(connectionString);
             var mainController = new MainController(productRepository, supplierRepository);
 
             Application.Run(new MainForm(mainController));
