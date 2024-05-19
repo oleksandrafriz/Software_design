@@ -1,71 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary
 {
-    public class AddProductCommand : ICommand
+    public abstract class ProductCommandBase : ICommand
     {
-        private readonly IProductRepository _repository;
+        protected readonly IProductRepository _repository;
+
+        protected ProductCommandBase(IProductRepository repository)
+        {
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        }
+
+        public abstract void Execute();
+    }
+
+    public class AddProductCommand : ProductCommandBase
+    {
         private readonly Product _product;
 
         public AddProductCommand(IProductRepository repository, Product product)
+            : base(repository)
         {
-            _repository = repository;
-            _product = product;
+            _product = product ?? throw new ArgumentNullException(nameof(product));
         }
 
-        public void Execute()
+        public override void Execute()
         {
             _repository.AddProduct(_product);
         }
     }
 
-    public class UpdateProductCommand : ICommand
+    public class UpdateProductCommand : ProductCommandBase
     {
-        private readonly IProductRepository _repository;
         private readonly Product _product;
 
         public UpdateProductCommand(IProductRepository repository, Product product)
+            : base(repository)
         {
-            _repository = repository;
-            _product = product;
+            _product = product ?? throw new ArgumentNullException(nameof(product));
         }
 
-        public void Execute()
+        public override void Execute()
         {
             _repository.UpdateProduct(_product);
         }
     }
 
-    public class DeleteProductCommand : ICommand
+    public class DeleteProductCommand : ProductCommandBase
     {
-        private readonly IProductRepository _repository;
         private readonly int _productId;
 
         public DeleteProductCommand(IProductRepository repository, int productId)
+            : base(repository)
         {
-            _repository = repository;
             _productId = productId;
         }
 
-        public void Execute()
+        public override void Execute()
         {
             _repository.DeleteProduct(_productId);
         }
     }
 
-    public class GetProductByIdCommand : ICommand
+    public class GetProductByIdQuery : ICommand
     {
         private readonly IProductRepository _repository;
         private readonly int _productId;
         public Product Product { get; private set; }
 
-        public GetProductByIdCommand(IProductRepository repository, int productId)
+        public GetProductByIdQuery(IProductRepository repository, int productId)
         {
-            _repository = repository;
+            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
             _productId = productId;
         }
 
@@ -74,5 +79,4 @@ namespace ClassLibrary
             Product = _repository.GetProductById(_productId);
         }
     }
-
 }
