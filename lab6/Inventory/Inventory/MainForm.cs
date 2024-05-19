@@ -24,7 +24,7 @@ namespace Inventory
         {
             var products = mainController.GetAllProducts();
             chooseTovar.DataSource = products;
-            chooseTovar.DisplayMember = "Id";
+            chooseTovar.DisplayMember = "Name";
             chooseTovar.ValueMember = "Id";
         }
 
@@ -47,12 +47,12 @@ namespace Inventory
                 }
                 else
                 {
-                    MessageBox.Show("Please select a valid product.");
+                    MessageBox.Show("Виберіть дійсний продукт.");
                 }
             }
             else
             {
-                MessageBox.Show("Please select a product to edit.");
+                MessageBox.Show("Виберіть продукт для редагування.");
             }
         }
 
@@ -79,14 +79,14 @@ namespace Inventory
             var searchText = searchTextBox.Text.Trim();
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                MessageBox.Show("Please enter a search term.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Будь ласка, введіть пошуковий термін.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             var products = mainController.SearchProductsByName(searchText);
             if (products.Count == 0)
             {
-                MessageBox.Show("No products found matching the search term.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Не знайдено продуктів, що відповідають пошуковому терміну.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             chooseTovar.DataSource = products;
@@ -121,20 +121,11 @@ namespace Inventory
                             sw.WriteLine($"{product.Id},{product.Name},{product.Quantity},{product.Price},{product.Postachalnik}");
                         }
                     }
-                    MessageBox.Show("Products exported successfully!");
+                    MessageBox.Show("Продукти успішно експортовані!");
                 }
             }
         }
 
-        private void searchResultsTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void postachalniki_Click(object sender, EventArgs e)
         {

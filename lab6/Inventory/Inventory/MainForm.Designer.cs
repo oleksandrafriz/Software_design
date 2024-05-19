@@ -167,7 +167,7 @@ namespace Inventory
             this.exportToCSVButton.BackColor = System.Drawing.Color.SteelBlue;
             this.exportToCSVButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.exportToCSVButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.exportToCSVButton.Location = new System.Drawing.Point(363, 3);
+            this.exportToCSVButton.Location = new System.Drawing.Point(399, 3);
             this.exportToCSVButton.Name = "exportToCSVButton";
             this.exportToCSVButton.Size = new System.Drawing.Size(95, 44);
             this.exportToCSVButton.TabIndex = 9;
