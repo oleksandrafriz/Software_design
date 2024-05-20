@@ -1,52 +1,45 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ClassLibrary;
+using ClassLibrary.Commands;
 
 namespace Inventory
 {
     public class MainController
     {
-        private readonly IProductRepository productRepository;
-        private readonly ISupplierRepository supplierRepository;
+        private readonly IProductRepository _productRepository;
+        private readonly ISupplierRepository _supplierRepository;
 
         public MainController(IProductRepository productRepository, ISupplierRepository supplierRepository)
         {
-            this.productRepository = productRepository;
-            this.supplierRepository = supplierRepository;
+            _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
+            _supplierRepository = supplierRepository ?? throw new ArgumentNullException(nameof(supplierRepository));
         }
 
-        public List<Product> GetAllProducts()
-        {
-            return productRepository.GetAllProducts();
-        }
+        public List<Product> GetAllProducts() => _productRepository.GetAllProducts();
 
-        public Product GetProductById(int productId)
-        {
-            return productRepository.GetProductById(productId);
-        }
+        public Product GetProductById(int productId) => _productRepository.GetProductById(productId);
 
         public void AddProduct(Product product)
         {
-            productRepository.AddProduct(product);
+            var command = new AddProductCommand(_productRepository, product);
+            command.Execute();
         }
 
         public void UpdateProduct(Product product)
         {
-            productRepository.UpdateProduct(product);
+            var command = new UpdateProductCommand(_productRepository, product);
+            command.Execute();
         }
 
         public void DeleteProduct(int productId)
         {
-            productRepository.DeleteProduct(productId);
+            var command = new DeleteProductCommand(_productRepository, productId);
+            command.Execute();
         }
 
-        public List<Product> SearchProductsByName(string productName)
-        {
-            return productRepository.SearchProductsByName(productName);
-        }
+        public List<Product> SearchProductsByName(string productName) => _productRepository.SearchProductsByName(productName);
 
-        public List<Postachalnik> GetAllSuppliers()
-        {
-            return supplierRepository.GetAllSuppliers();
-        }
+        public List<Postachalnik> GetAllSuppliers() => _supplierRepository.GetAllSuppliers();
     }
 }
