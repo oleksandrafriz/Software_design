@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
     public partial class AddTovarPage : Form
     {
-        private readonly MainController _mainController;
+        private readonly ProductController _productController;
 
-        public AddTovarPage(MainController mainController)
+        public AddTovarPage(ProductController productController)
         {
             InitializeComponent();
-            _mainController = mainController ?? throw new ArgumentNullException(nameof(mainController));
+            _productController = productController ?? throw new ArgumentNullException(nameof(productController));
         }
 
         private void saveNewTovar_Click(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace Inventory
                     Postachalnik = postachalnik
                 };
 
-                _mainController.AddProduct(product);
+                _productController.AddProduct(product);
                 MessageBox.Show("Продукт успішно додано!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }

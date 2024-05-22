@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
     public partial class ShowTovar : Form
     {
-        private MainController mainController;
+        private ProductController productController;
 
-        public ShowTovar(MainController mainController)
+        public ShowTovar(ProductController productController)
         {
             InitializeComponent();
-            this.mainController = mainController;
+            this.productController = productController;
             LoadProducts();
         }
 
         private void LoadProducts()
         {
-            var products = mainController.GetAllProducts();
+            var products = productController.GetAllProducts();
             DisplayProducts(products);
         }
 
@@ -41,7 +42,7 @@ namespace Inventory
 
         private void LoadProductsSorted(Func<Product, object> keySelector, bool ascending = true)
         {
-            var products = mainController.GetAllProducts();
+            var products = productController.GetAllProducts();
             var sortedProducts = ascending ? products.OrderBy(keySelector).ToList() : products.OrderByDescending(keySelector).ToList();
             DisplayProducts(sortedProducts);
         }
@@ -51,7 +52,7 @@ namespace Inventory
             if (dgvProducts.SelectedRows.Count > 0)
             {
                 var productId = (int)dgvProducts.SelectedRows[0].Cells[0].Value;
-                mainController.DeleteProduct(productId);
+                productController.DeleteProduct(productId);
                 LoadProducts();
                 MessageBox.Show("Продукт успішно видалено!");
             }
@@ -71,7 +72,7 @@ namespace Inventory
                 return;
             }
 
-            var products = mainController.GetAllProducts()
+            var products = productController.GetAllProducts()
                                          .Where(p => p.Name.Split(' ').Any(word => word.Contains(searchText, StringComparison.CurrentCultureIgnoreCase)))
                                          .ToList();
 

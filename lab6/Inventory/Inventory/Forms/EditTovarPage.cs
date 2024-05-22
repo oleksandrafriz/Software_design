@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
     public partial class EditTovarPage : Form
     {
-        private MainController mainController;
-        private int productId;
+        private readonly ProductController _productController;
+        private int _productId;
 
-        public EditTovarPage(MainController mainController, int productId)
+        public EditTovarPage(ProductController productController, int productId)
         {
             InitializeComponent();
-            this.mainController = mainController;
-            this.productId = productId;
+            _productController = productController ?? throw new ArgumentNullException(nameof(productController));
+            _productId = productId;
             LoadProductData();
         }
 
         private void LoadProductData()
         {
-            var product = mainController.GetProductById(productId);
+            var product = _productController.GetProductById(_productId);
             if (product != null)
             {
                 editedTovarName.Text = product.Name;
@@ -31,7 +32,6 @@ namespace Inventory
 
         private void saveEditedTovar_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(editedTovarName.Text) ||
                 string.IsNullOrWhiteSpace(editedQuantityTovar.Text) ||
                 string.IsNullOrWhiteSpace(editedPriceTovar.Text) ||
@@ -55,14 +55,14 @@ namespace Inventory
 
             var product = new Product
             {
-                Id = productId,
+                Id = _productId,
                 Name = editedTovarName.Text,
                 Quantity = quantity,
                 Price = price,
                 Postachalnik = EditedPostachTovar.Text
             };
 
-            mainController.UpdateProduct(product);
+            _productController.UpdateProduct(product);
             MessageBox.Show("Продукт успішно оновлено!");
             this.Close();
         }
