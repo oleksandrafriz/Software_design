@@ -23,10 +23,7 @@ namespace ClassLibrary
             const string query = "INSERT INTO tovars (tov_name, quantity, price, id_postach) VALUES (@tov_name, @quantity, @price, @id_postach)";
             ExecuteNonQuery(query, cmd =>
             {
-                cmd.Parameters.AddWithValue("@tov_name", product.Name);
-                cmd.Parameters.AddWithValue("@quantity", product.Quantity);
-                cmd.Parameters.AddWithValue("@price", product.Price);
-                cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
+                AddProductParameters(cmd, product);
             });
         }
 
@@ -35,11 +32,8 @@ namespace ClassLibrary
             const string query = "UPDATE tovars SET tov_name = @tov_name, quantity = @quantity, price = @price, id_postach = @id_postach WHERE id_tovar = @id_tovar";
             ExecuteNonQuery(query, cmd =>
             {
+                AddProductParameters(cmd, product);
                 cmd.Parameters.AddWithValue("@id_tovar", product.Id);
-                cmd.Parameters.AddWithValue("@tov_name", product.Name);
-                cmd.Parameters.AddWithValue("@quantity", product.Quantity);
-                cmd.Parameters.AddWithValue("@price", product.Price);
-                cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
             });
         }
 
@@ -121,22 +115,7 @@ namespace ClassLibrary
 
         private List<Product> ExecuteReader(string query, Func<MySqlDataReader, Product> readRow)
         {
-            var result = new List<Product>();
-            using (var connection = GetConnection())
-            {
-                connection.Open();
-                using (var cmd = new MySqlCommand(query, connection))
-                {
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            result.Add(readRow(reader));
-                        }
-                    }
-                }
-            }
-            return result;
+            return ExecuteReader(query, null, readRow);
         }
 
         private List<Product> ExecuteReader(string query, Action<MySqlCommand> parameterize, Func<MySqlDataReader, Product> readRow)
@@ -147,7 +126,7 @@ namespace ClassLibrary
                 connection.Open();
                 using (var cmd = new MySqlCommand(query, connection))
                 {
-                    parameterize(cmd);
+                    parameterize?.Invoke(cmd);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
@@ -180,5 +159,15 @@ namespace ClassLibrary
             }
             return result;
         }
+
+        private void AddProductParameters(MySqlCommand cmd, Product product)
+        {
+            cmd.Parameters.AddWithValue("@tov_name", product.Name);
+            cmd.Parameters.AddWithValue("@quantity", product.Quantity);
+            cmd.Parameters.AddWithValue("@price", product.Price);
+            cmd.Parameters.AddWithValue("@id_postach", product.Postachalnik);
+        }
     }
 }
+
+

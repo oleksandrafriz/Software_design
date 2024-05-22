@@ -5,18 +5,21 @@ using System.Windows.Forms;
 using System.IO;
 using System.Text;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
     public partial class MainForm : Form
     {
-        private readonly MainController _mainController;
+        private readonly ProductController _productController;
+        private readonly SupplierController _supplierController;
         private int _selectedProductId;
 
-        public MainForm(MainController mainController)
+        public MainForm(ProductController productController, SupplierController supplierController)
         {
             InitializeComponent();
-            _mainController = mainController ?? throw new ArgumentNullException(nameof(mainController));
+            _productController = productController ?? throw new ArgumentNullException(nameof(productController));
+            _supplierController = supplierController ?? throw new ArgumentNullException(nameof(supplierController));
             LoadProductIds();
             InitializeSearchResultsGridView();
         }
@@ -33,7 +36,7 @@ namespace Inventory
 
         private void LoadProductIds()
         {
-            var products = _mainController.GetAllProducts();
+            var products = _productController.GetAllProducts();
             chooseTovar.DataSource = products;
             chooseTovar.DisplayMember = "Name";
             chooseTovar.ValueMember = "Id";
@@ -41,7 +44,7 @@ namespace Inventory
 
         private void addTovar_Click(object sender, EventArgs e)
         {
-            var addTovarPage = new AddTovarPage(_mainController);
+            var addTovarPage = new AddTovarPage(_productController);
             addTovarPage.Show();
         }
 
@@ -50,7 +53,7 @@ namespace Inventory
             if (chooseTovar.SelectedItem is Product selectedProduct)
             {
                 _selectedProductId = selectedProduct.Id;
-                var editTovarPage = new EditTovarPage(_mainController, _selectedProductId);
+                var editTovarPage = new EditTovarPage(_productController, _selectedProductId);
                 editTovarPage.Show();
             }
             else
@@ -61,7 +64,7 @@ namespace Inventory
 
         private void tovars_Click(object sender, EventArgs e)
         {
-            var showTovarPage = new ShowTovar(_mainController);
+            var showTovarPage = new ShowTovar(_productController);
             showTovarPage.Show();
         }
 
@@ -82,7 +85,7 @@ namespace Inventory
                 return;
             }
 
-            var products = _mainController.SearchProductsByName(searchText);
+            var products = _productController.SearchProductsByName(searchText);
             DisplaySearchResults(products);
         }
 
@@ -105,7 +108,7 @@ namespace Inventory
 
         private void exportToCSVButton_Click(object sender, EventArgs e)
         {
-            var products = _mainController.GetAllProducts();
+            var products = _productController.GetAllProducts();
             using (var sfd = new SaveFileDialog())
             {
                 sfd.Filter = "CSV files (*.csv)|*.csv";
@@ -132,7 +135,7 @@ namespace Inventory
 
         private void postachalniki_Click(object sender, EventArgs e)
         {
-            var showSuppliersForm = new ShowSuppliersForm(_mainController);
+            var showSuppliersForm = new ShowSuppliersForm(_supplierController);
             showSuppliersForm.Show();
         }
     }

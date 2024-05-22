@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
@@ -17,9 +18,10 @@ namespace Inventory
 
             var productRepository = new ProductRepository(connectionString);
             var supplierRepository = new SupplierRepository(connectionString);
-            var mainController = new MainController(productRepository, supplierRepository);
+            var productController = new ProductController(productRepository);
+            var supplierController = new SupplierController(supplierRepository);
 
-            Application.Run(new MainForm(mainController));
+            Application.Run(new MainForm(productController, supplierController));
         }
     }
 }

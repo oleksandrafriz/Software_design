@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\PoweR\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\PoweR\\.nuget\\packages"
+    ]
+  }
+}

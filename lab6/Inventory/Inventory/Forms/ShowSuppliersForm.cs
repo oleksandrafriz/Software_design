@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
 using ClassLibrary;
+using ClassLibrary.Controllers;
 
 namespace Inventory
 {
     public partial class ShowSuppliersForm : Form
     {
-        private MainController mainController;
+        private SupplierController supplierController;
 
-        public ShowSuppliersForm(MainController mainController)
+        public ShowSuppliersForm(SupplierController supplierController)
         {
             InitializeComponent();
-            this.mainController = mainController;
+            this.supplierController = supplierController;
             LoadSuppliers();
         }
 
@@ -19,7 +20,7 @@ namespace Inventory
         {
             try
             {
-                var suppliers = mainController.GetAllSuppliers();
+                var suppliers = supplierController.GetAllSuppliers();
                 DisplaySuppliers(suppliers);
             }
             catch (Exception ex)
